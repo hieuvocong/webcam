@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="app.css">
+    <title>Webcam</title>
+</head>
+
+<body>
+    <div id="webcam"></div>
+    <input type=button value="Capture" onClick="capture()">
+    <div id="photo"></div>
+
+    <script src="webcam.min.js"></script>
+    <script>
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: "jpeg",
+            jpeg_quality: 90
+        });
+        Webcam.attach("webcam");
+
+        function capture() {
+            Webcam.snap(function (data_uri) {
+                var photo = document.getElementById("photo");
+                photo.innerHTML = "<img src='" + data_uri + "'/>";
+            });
+        }
+    </script>
+</body>
+
+</html>
