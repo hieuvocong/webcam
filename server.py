@@ -1,15 +1,18 @@
 import base64
 import io
 import json
+
 import numpy as np
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from PIL import Image
 
 app = Flask(__name__)
+CORS(app)
 
 
-@app.route("/face-detect/", methods=["GET", "POST"])
-def face_detect():
+@app.route("/upload/", methods=["POST"])
+def upload():
     if request.method == "POST":
         data = json.loads(request.data)
         image_string = data["image"].split(",")[1]
